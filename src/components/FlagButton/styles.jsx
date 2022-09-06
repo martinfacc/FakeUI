@@ -13,8 +13,15 @@ export const FlagButton = styled.button`
 		filter: grayscale(100%);
 	}
 
-	&:hover > img,
-	&.active > img {
-		filter: grayscale(0);
+	&:hover {
+		img {
+			filter: grayscale(0);
+		}
+	}
+
+	&.active {
+		img {
+			filter: grayscale(0);
+		}
 	}
 `
