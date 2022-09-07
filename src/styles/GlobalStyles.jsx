@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 import '@fontsource/dm-sans'
+import '@fontsource/fira-code'
+import '@fontsource/dejavu-sans'
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -9,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
   --color-black: #2A2D34;
   --color-white: #F5F8FA;
   --color-gray: #3F4254;
+  --color-background: #282A36;
 
   --color-green-1: #177B7E;
   --color-green-2: #0EA2A3;
