@@ -23,5 +23,5 @@ export const Container = styled.div`
 	padding: 20px;
 	background-color: white;
 	border-radius: 10px;
-	height: max-content;
+	height: 100%;
 `

@@ -21,11 +21,11 @@ const App = () => {
 						<Route
 							path="/playground"
 							element={
-								<SeedContextProvider>
-									<LocaleContextProvider>
+								<LocaleContextProvider>
+									<SeedContextProvider>
 										<Playground />
-									</LocaleContextProvider>
-								</SeedContextProvider>
+									</SeedContextProvider>
+								</LocaleContextProvider>
 							}
 						/>
 					</Routes>

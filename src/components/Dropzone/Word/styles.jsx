@@ -3,6 +3,9 @@ import styled from 'styled-components'
 export const Word = styled.div`
 	font-family: 'DejaVu Sans';
 	font-family: 'Fira Code';
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 
 	color: white;
 	&.red {

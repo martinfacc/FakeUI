@@ -14,12 +14,15 @@ export const MenuButton = styled.button`
 	border: none;
 	cursor: pointer;
 	background: transparent;
+	color: white;
 
 	span {
+		color: currentColor;
 		font-size: 1rem;
 	}
 
 	svg {
+		fill: white;
 		width: 10px;
 		transition: rotate 0.3s;
 	}
