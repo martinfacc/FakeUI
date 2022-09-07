@@ -32,18 +32,10 @@ const SpacerComponent = (props) => {
 		// const index = parseInt(target.dataset.index)
 		// const fatherId = target.dataset.fatherId
 
-		console.log({
-			type,
-			api,
-			method,
-			index,
-			fatherId,
-		})
-
 		if (type === 'container') {
 			const container = {
 				id: uuid4(),
-				// name: type,
+				name: index,
 				type,
 				opened: true,
 				children: [],
@@ -52,7 +44,7 @@ const SpacerComponent = (props) => {
 		} else if (type === 'element') {
 			const element = {
 				id: uuid4(),
-				// name: api + '_' + method,
+				name: index,
 				type,
 				api,
 				method,

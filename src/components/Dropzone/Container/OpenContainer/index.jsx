@@ -8,7 +8,7 @@ import { Concealer } from '@/components/Dropzone/Container/styles'
 import useSeed from '@/hooks/useSeed'
 
 const OpenContainerComponent = (props) => {
-	const { id, preview, index } = props
+	const { id, preview } = props
 
 	const { toggleElement, getElement } = useSeed()
 
@@ -24,17 +24,17 @@ const OpenContainerComponent = (props) => {
 					<Word>{'>'}</Word>
 				</Concealer>
 				<Space />
-				<Word color="green">{name || index}</Word>
+				<Word color="green">{name}</Word>
 				<Word>:</Word>
 				<Space />
 				{'{'}
 			</Line>
+			{!preview && <Spacer index={0} fatherId={id} />}
 			<ChildrenContainer
 				id={id}
 				preview={preview}
 				elements={childrenElements}
 			/>
-			{!preview && <Spacer index={0} fatherId={id} />}
 			<Line>{'},'}</Line>
 		</>
 	)

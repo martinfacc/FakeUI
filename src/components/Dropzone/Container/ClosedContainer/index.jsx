@@ -6,7 +6,7 @@ import { Concealer } from '@/components/Dropzone/Container/styles'
 import useSeed from '@/hooks/useSeed'
 
 const ClosedContainerComponent = (props) => {
-	const { id, index } = props
+	const { id } = props
 	const { toggleElement, getElement } = useSeed()
 	const { name } = getElement(id)
 
@@ -19,7 +19,7 @@ const ClosedContainerComponent = (props) => {
 					<Word>{'>'}</Word>
 				</Concealer>
 				<Space />
-				<Word color="green">{name || index}</Word>
+				<Word color="green">{name}</Word>
 				<Word>:</Word>
 				<Space />
 				{'{...},'}

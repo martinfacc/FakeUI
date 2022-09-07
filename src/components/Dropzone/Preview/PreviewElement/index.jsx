@@ -21,7 +21,7 @@ const PreviewElementComponent = (props) => {
 	return (
 		<PreviewElement>
 			<Line>
-				<Word color="green">{name || index}</Word>
+				<Word color="green">{name}</Word>
 				<Word>:</Word>
 				<Space />
 				<Word color="blue">"</Word>

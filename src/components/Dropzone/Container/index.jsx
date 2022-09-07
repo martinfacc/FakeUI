@@ -10,9 +10,9 @@ const ContainerComponent = (props) => {
 	return (
 		<Container>
 			{opened ? (
-				<OpenContainer id={id} preview={preview} index={index} />
+				<OpenContainer id={id} preview={preview}/>
 			) : (
-				<ClosedContainer id={id} index={index} />
+				<ClosedContainer id={id}/>
 			)}
 		</Container>
 	)
