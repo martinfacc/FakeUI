@@ -15,17 +15,29 @@ const ChildrenContainerComponent = (props) => {
 					<>
 						{!preview && (
 							<>
-								<Element key={element.id} id={element.id} index={index} />
-								<Spacer fatherId={id} index={index + 1} />
+								<Element
+									key={'e' + element.id + preview}
+									id={element.id}
+									index={index}
+								/>
+								<Spacer
+									key={'s' + element.id + preview}
+									fatherId={id}
+									index={index + 1}
+								/>
 							</>
 						)}
 						{preview && (
-							<PreviewElement key={element.id} id={element.id} index={index} />
+							<PreviewElement
+								key={element.id + preview}
+								id={element.id}
+								index={index}
+							/>
 						)}
 					</>
 				) : (
 					<Container
-						key={element.id}
+						key={'c' + element.id + preview}
 						id={element.id}
 						preview={preview}
 					/>

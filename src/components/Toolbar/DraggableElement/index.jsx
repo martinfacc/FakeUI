@@ -1,5 +1,6 @@
 import React from 'react'
 import { DraggableElement } from './styles'
+import useSeed from '@/hooks/useSeed'
 
 const handleDragStart = (event) => {
 	event.dataTransfer.setData('type', event.target.dataset.type)
@@ -17,6 +18,12 @@ const handleDragEnd = () => {
 const DraggableElementComponent = (props) => {
 	const { type, api, method, description, children } = props
 
+	const { seed, addElement } = useSeed()
+
+	const handleDoubleClick = () => {
+		addElement(seed.lastId, Infinity, { type, api, method })
+	}
+
 	return (
 		<DraggableElement
 			draggable
@@ -26,6 +33,7 @@ const DraggableElementComponent = (props) => {
 			data-description={description}
 			onDragStart={handleDragStart}
 			onDragEnd={handleDragEnd}
+			onDoubleClick={handleDoubleClick}
 		>
 			{children}
 		</DraggableElement>

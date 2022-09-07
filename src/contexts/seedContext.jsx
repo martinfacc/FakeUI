@@ -8,14 +8,27 @@ export const SeedContextProvider = (props) => {
 
 	const { locale } = useLocale()
 
+	// const [seed, setSeed] = React.useState({
+	// 	root: {
+	// 		id: 'root',
+	// 		name: 'root',
+	// 		type: 'container',
+	// 		opened: true,
+	// 		children: [],
+	// 	},
+	// })
+
 	const [seed, setSeed] = React.useState({
-		root: {
-			id: 'root',
-			name: 'root',
-			type: 'container',
-			opened: true,
-			children: [],
-		},
+		lastId: 'root',
+		elements: [
+			{
+				id: 'root',
+				name: 'root',
+				type: 'container',
+				opened: true,
+				children: [],
+			},
+		],
 	})
 
 	const values = React.useMemo(() => ({ seed, setSeed }), [seed, locale])

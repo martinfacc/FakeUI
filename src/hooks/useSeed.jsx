@@ -6,39 +6,59 @@ import identifier from '@/utils/identifier'
 const useSeed = () => {
 	const { seed, setSeed } = React.useContext(SeedContext)
 
-	const addElement = (fatherId, index, element) => {
-		const father = seed[fatherId]
-		const start = father.children.slice(0, index)
-		const end = father.children.slice(index)
-		element.name = identifier.next().value
-		setSeed((prevSeed) => ({
-			...prevSeed,
-			[fatherId]: {
-				...father,
-				children: [...start, element.id, ...end],
-			},
-			[element.id]: element,
-		}))
-	}
+	// const addElement = (fatherId, index, element) => {
+	// 	const father = seed[fatherId]
+	// 	const start = father.children.slice(0, index)
+	// 	const end = father.children.slice(index)
+	// 	element.name = identifier.next().value
+	// 	setSeed((prevSeed) => ({
+	// 		...prevSeed,
+	// 		[fatherId]: {
+	// 			...father,
+	// 			children: [...start, element.id, ...end],
+	// 		},
+	// 		[element.id]: element,
+	// 	}))
+	// }
+
+	// const getElement = (id) => {
+	// 	const element = seed[id]
+	// 	return element
+	// }
 
 	const getElement = (id) => {
-		const element = seed[id]
+		const element = seed.elements.find((element) => element.id === id)
 		return element
+	}
+
+	// const toggleElement = (id) => {
+	// 	const element = getElement(id)
+	// 	const { opened } = element
+	// 	setSeed((prevSeed) => ({
+	// 		...prevSeed,
+	// 		[id]: {
+	// 			...element,
+	// 			opened: !opened,
+	// 		},
+	// 	}))
+	// }
+
+	const updateElement = (id, element) => {
+		setSeed((prevSeed) => {
+			const elements = prevSeed.elements.filter((element) => element.id !== id)
+			return {
+				...prevSeed,
+				elements: [...elements, element],
+			}
+		})
 	}
 
 	const toggleElement = (id) => {
 		const element = getElement(id)
-		const { opened } = element
-		setSeed((prevSeed) => ({
-			...prevSeed,
-			[id]: {
-				...element,
-				opened: !opened,
-			},
-		}))
+		updateElement(id, { ...element, opened: !element.opened })
 	}
 
-	const makeSeedGenerator = (containerId) => {
+	const makeSeed = (containerId) => {
 		const element = getElement(containerId)
 		if (element.type === 'container') {
 			const self = {}
@@ -47,17 +67,68 @@ const useSeed = () => {
 				const child = getElement(childId)
 				const { type, name } = child
 				if (type === 'container') {
-					self[name] = makeSeedGenerator(childId)
+					self[name] = makeSeed(childId)
 				} else {
 					const { api, method } = child
-					self[name] = apis[api][method]
+					self[name] = apis[api][method]()
 				}
 			})
 			return self
 		}
 	}
 
-	console.log({ seed: makeSeedGenerator('root') })
+	const makeAllSeed = (seeds = 1) => {
+		const seedArray = []
+		for (let i = 0; i < seeds; i++) {
+			seedArray.push(makeSeed('root'))
+		}
+		return seedArray
+	}
+
+	// const addElement = (fatherId, index, element) => {
+	// 	element.id = element.name = identifier.next().value
+	// 	const father = getElement(fatherId)
+	// 	const start = father.children.slice(0, index)
+	// 	const end = father.children.slice(index)
+	// 	updateElement(fatherId, {
+	// 		...father,
+	// 		children: [...start, element.id, ...end],
+	// 	})
+	// 	if (element.type === 'container') {
+	// 		element.children = []
+	// 		element.opened = true
+	// 	}
+	// 	setSeed((prevSeed) => ({
+	// 		...prevSeed,
+	// 		lastId: fatherId,
+	// 		elements: [...prevSeed.elements, element],
+	// 	}))
+	// }
+
+	const addElement = (fatherId, index, element) => {
+		element.id = element.name = identifier.next().value
+		if (element.type === 'container') {
+			element.children = []
+			element.opened = true
+		}
+		const father = getElement(fatherId)
+		const start = father.children.slice(0, index)
+		const end = father.children.slice(index)
+		const updatedFather = {
+			...father,
+			children: [...start, element.id, ...end],
+		}
+		setSeed((prevSeed) => {
+			const elements = prevSeed.elements.filter(
+				(element) => element.id !== fatherId
+			)
+			return {
+				...prevSeed,
+				lastId: fatherId,
+				elements: [...elements, updatedFather, element],
+			}
+		})
+	}
 
 	return {
 		seed,
@@ -65,6 +136,7 @@ const useSeed = () => {
 		addElement,
 		getElement,
 		toggleElement,
+		makeAllSeed,
 	}
 }
 

@@ -12,7 +12,7 @@ const ElementComponent = (props) => {
 
 	const element = getElement(id)
 	const { name, api, method } = element
-	console.log({ element })
+	// console.log({ element })
 
 	return (
 		<Element>
@@ -20,11 +20,9 @@ const ElementComponent = (props) => {
 				<Word color="green">{name}</Word>
 				<Word>:</Word>
 				<Space />
-				{/* <Word color="blue">{'"'}</Word> */}
 				<Word color="red">{api}</Word>
 				<Word>.</Word>
 				<Word color="red">{method}</Word>
-				{/* <Word color="blue">{'"'}</Word> */}
 				<Word>,</Word>
 			</Line>
 		</Element>

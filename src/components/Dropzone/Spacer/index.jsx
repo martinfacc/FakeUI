@@ -10,18 +10,18 @@ const SpacerComponent = (props) => {
 	const spacerRef = React.useRef(null)
 
 	const handleDragOver = (event) => {
-		console.log('onDragOver')
+		// console.log('onDragOver')
 		event.preventDefault()
 		spacerRef?.current?.classList?.add('active')
 	}
 
 	const handleDragLeave = () => {
-		console.log('onDragLeave')
+		// console.log('onDragLeave')
 		spacerRef?.current?.classList.remove('active')
 	}
 
 	const handleDrop = (event) => {
-		console.log('onDrop')
+		// console.log('onDrop')
 		event.preventDefault()
 		const target = event.currentTarget
 		handleDragLeave()
