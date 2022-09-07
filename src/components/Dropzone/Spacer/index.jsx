@@ -39,6 +39,7 @@ const SpacerComponent = (props) => {
 				type,
 				opened: true,
 				children: [],
+				fatherId: fatherId,
 			}
 			addElement(fatherId, index, container)
 		} else if (type === 'element') {
@@ -48,7 +49,7 @@ const SpacerComponent = (props) => {
 				type,
 				api,
 				method,
-				father: fatherId,
+				fatherId: fatherId,
 			}
 			addElement(fatherId, index, element)
 		}

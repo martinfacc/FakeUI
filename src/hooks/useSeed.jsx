@@ -58,6 +58,16 @@ const useSeed = () => {
 		updateElement(id, { ...element, opened: !element.opened })
 	}
 
+	const searchDuplicateName = (fatherId, name) => {
+		const father = getElement(fatherId)
+		const { children } = father
+		const isDuplicated = children.some((childId) => {
+			const child = getElement(childId)
+			return child.name === name
+		})
+		return isDuplicated
+	}
+
 	const makeSeed = (containerId) => {
 		const element = getElement(containerId)
 		if (element.type === 'container') {
@@ -107,6 +117,7 @@ const useSeed = () => {
 
 	const addElement = (fatherId, index, element) => {
 		element.id = element.name = identifier.next().value
+		element.fatherId = fatherId
 		if (element.type === 'container') {
 			element.children = []
 			element.opened = true
@@ -134,9 +145,11 @@ const useSeed = () => {
 		seed,
 		setSeed,
 		addElement,
+		updateElement,
 		getElement,
 		toggleElement,
 		makeAllSeed,
+		searchDuplicateName,
 	}
 }
 

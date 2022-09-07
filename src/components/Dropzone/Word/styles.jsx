@@ -6,6 +6,8 @@ export const Word = styled.div`
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	font-size: 1rem;
+
 
 	color: white;
 	&.red {

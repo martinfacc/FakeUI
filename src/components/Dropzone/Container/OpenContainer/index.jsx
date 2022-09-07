@@ -6,6 +6,7 @@ import Spacer from '@/components/Dropzone/Spacer'
 import ChildrenContainer from '@/components/Dropzone/Container/ChildrenContainer'
 import { Concealer } from '@/components/Dropzone/Container/styles'
 import useSeed from '@/hooks/useSeed'
+import ButtonName from '@/components/Dropzone/ButtonName'
 
 const OpenContainerComponent = (props) => {
 	const { id, preview } = props
@@ -24,7 +25,13 @@ const OpenContainerComponent = (props) => {
 					<Word>{'>'}</Word>
 				</Concealer>
 				<Space />
-				<Word color="green">{name}</Word>
+				{id === 'root' ? (
+					<Word color="green">{name}</Word>
+				) : (
+					<ButtonName id={id}>
+						<Word color="green">{name}</Word>
+					</ButtonName>
+				)}
 				<Word>:</Word>
 				<Space />
 				{'{'}

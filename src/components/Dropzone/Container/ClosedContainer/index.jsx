@@ -4,6 +4,7 @@ import Word from '@/components/Dropzone/Word'
 import Space from '@/components/Dropzone/Space'
 import { Concealer } from '@/components/Dropzone/Container/styles'
 import useSeed from '@/hooks/useSeed'
+import ButtonName from '@/components/Dropzone/ButtonName'
 
 const ClosedContainerComponent = (props) => {
 	const { id } = props
@@ -19,7 +20,13 @@ const ClosedContainerComponent = (props) => {
 					<Word>{'>'}</Word>
 				</Concealer>
 				<Space />
-				<Word color="green">{name}</Word>
+				{id === 'root' ? (
+					<Word color="green">{name}</Word>
+				) : (
+					<ButtonName id={id}>
+						<Word color="green">{name}</Word>
+					</ButtonName>
+				)}
 				<Word>:</Word>
 				<Space />
 				{'{...},'}
