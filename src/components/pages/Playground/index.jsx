@@ -4,7 +4,7 @@ import {
 	PlaygroundHeader,
 	PlaygroundMain,
 	PlaygroundFooter,
-	InputGroup,
+	FormSeed,
 } from './styles'
 import Toolbar from '@/components/Toolbar'
 import Dropzone from '@/components/Dropzone'
@@ -16,25 +16,31 @@ import useToast from '@/hooks/useToast'
 
 const PlaygroundPage = () => {
 	const { makeAllSeed } = useSeed()
-	const [seed, setSeed] = React.useState(1)
 	const { explosion } = useConfetti()
 	const { toast } = useToast()
 
-	const handleSeed = () => {
-		const result = makeAllSeed(seed)
+	const handleSubmit = (event) => {
+		event.preventDefault()
+		const { seed } = event.target
+		const seedValue = Number(seed?.value) || 1
+		const result = makeAllSeed(seedValue)
 		navigator.clipboard.writeText(JSON.stringify(result))
 		// alert('Copied to clipboard')
 		explosion()
 		toast('success', 'Copied to clipboard!', {
 			position: 'middle',
-			duration: 1500
+			duration: 1500,
 		})
+		event.target.reset()
 		console.log({ result })
 	}
 
 	const handleChange = (event) => {
-		const value = Number(event.target.value)
-		setSeed(value)
+		const { value } = event.target
+		const valueOnlyNumber = value.replace(/[^0-9]/g, '')
+		const number = Number(valueOnlyNumber)
+		const seedValue = !Number.isNaN(number) && number > 0 ? number : undefined
+		event.target.value = seedValue || ''
 	}
 
 	return (
@@ -65,14 +71,14 @@ const PlaygroundPage = () => {
 				<Preview />
 			</PlaygroundMain>
 			<PlaygroundFooter>
-				<InputGroup>
-					<input type="number" value={seed} min={1} onChange={handleChange} />
-					<button onClick={handleSeed}>
+				<FormSeed onSubmit={handleSubmit}>
+					<input onChange={handleChange} defaultValue={1} name="seed" />
+					<button>
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
 							<path d="M361 215C375.3 223.8 384 239.3 384 256C384 272.7 375.3 288.2 361 296.1L73.03 472.1C58.21 482 39.66 482.4 24.52 473.9C9.377 465.4 0 449.4 0 432V80C0 62.64 9.377 46.63 24.52 38.13C39.66 29.64 58.21 29.99 73.03 39.04L361 215z" />
 						</svg>
 					</button>
-				</InputGroup>
+				</FormSeed>
 			</PlaygroundFooter>
 		</Playground>
 	)

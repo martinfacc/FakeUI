@@ -34,7 +34,7 @@ export const PlaygroundFooter = styled.div`
 	gap: 15px;
 `
 
-export const InputGroup = styled.div`
+export const FormSeed = styled.form`
 	display: flex;
 	border: 2px solid var(--color-gray);
 	border-radius: 10px;
