@@ -5,6 +5,7 @@ import Main from '@/components/Main'
 import Footer from '@/components/Footer'
 import Home from '@/components/pages/Home'
 import Playground from '@/components/pages/Playground'
+import Code from '@/components/pages/Code'
 import GlobalStyles from '@/styles/GlobalStyles'
 import { SpinnerContextProvider } from '@/contexts/spinnerContext'
 import { SeedContextProvider } from './contexts/seedContext'
@@ -28,6 +29,7 @@ const App = () => {
 									</LocaleContextProvider>
 								}
 							/>
+							<Route path="/code" element={<Code />} />
 						</Routes>
 					</Main>
 					<Footer />

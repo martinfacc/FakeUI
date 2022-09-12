@@ -141,12 +141,54 @@ const useSeed = () => {
 		})
 	}
 
+	const deleteElementRecursively = (id) => {
+		const element = getElement(id)
+		const { children } = element
+		if (children) {
+			children.forEach((childId) => deleteElementRecursively(childId))
+		}
+		setSeed((prevSeed) => {
+			const elements = prevSeed.elements.filter((element) => element.id !== id)
+			return {
+				...prevSeed,
+				elements,
+			}
+		})
+	}
+
+	const deleteElement = (id, deleteChildren = false) => {
+		const element = getElement(id)
+		const { fatherId } = element
+		const father = getElement(fatherId)
+		const fatherChildren = father.children.filter((childId) => childId !== id)
+		const updatedFather = { ...father, children: fatherChildren }
+		const indexOfElement = father.children.indexOf(id)
+		if (deleteChildren) {
+			deleteElementRecursively(id)
+		} else if (element.type === 'container') {
+			const start = fatherChildren.slice(0, indexOfElement)
+			const end = fatherChildren.slice(indexOfElement)
+			updatedFather.children = [...start, ...element.children, ...end]
+		}
+		setSeed((prevSeed) => {
+			const elements = prevSeed.elements.filter(
+				(element) => element.id !== fatherId
+			)
+			return {
+				...prevSeed,
+				lastId: fatherId,
+				elements: [...elements, updatedFather],
+			}
+		})
+	}
+
 	return {
 		seed,
 		setSeed,
+		getElement,
 		addElement,
 		updateElement,
-		getElement,
+		deleteElement,
 		toggleElement,
 		makeAllSeed,
 		searchDuplicateName,

@@ -12,6 +12,7 @@ const HeaderComponent = () => {
 				<Ul>
 					<NavItem to="/">Home</NavItem>
 					<NavItem to="/playground">Playground</NavItem>
+					<NavItem to="/code">Code</NavItem>
 				</Ul>
 				<UserAvatar
 					user={{ firstName: 'John', lastName: 'Doe' }}
