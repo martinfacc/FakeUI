@@ -15,7 +15,9 @@ const PreviewElementComponent = (props) => {
 	const { name, api, method } = element
 	const getValue = () => {
 		const apiMethod = apis[api][method]
-		return apiMethod()
+		const value = apiMethod()
+		console.log({ value, type: typeof value })
+		return value.toString()
 	}
 
 	return (
