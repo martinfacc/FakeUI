@@ -14,7 +14,8 @@ const CollapsibleMenuComponent = ({ buttonText, children }) => {
 		if (menuRef.current) {
 			const menu = menuRef.current
 			const menuHeight = menu.scrollHeight
-			menu.style.height = opened ? menuHeight + 'px' : 0
+			const newHeight = opened ? menuHeight + 'px' : 0
+			menu.style.height = newHeight
 		}
 	}, [opened])
 
