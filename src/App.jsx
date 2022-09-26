@@ -15,24 +15,24 @@ const App = () => {
 	return (
 		<Router>
 			<SpinnerContextProvider>
-					<Header />
-					<Main>
-						<Routes>
-							<Route path="/" element={<Home />} />
-							<Route
-								path="/playground"
-								element={
-									<LocaleContextProvider>
-										<SeedContextProvider>
-											<Playground />
-										</SeedContextProvider>
-									</LocaleContextProvider>
-								}
-							/>
-							<Route path="/code" element={<Code />} />
-						</Routes>
-					</Main>
-					<Footer />
+				<Header />
+				<Main>
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route
+							path="/playground"
+							element={
+								<LocaleContextProvider>
+									<SeedContextProvider>
+										<Playground />
+									</SeedContextProvider>
+								</LocaleContextProvider>
+							}
+						/>
+						<Route path="/code" element={<Code />} />
+					</Routes>
+				</Main>
+				<Footer />
 			</SpinnerContextProvider>
 			<GlobalStyles />
 		</Router>
